@@ -1,0 +1,13 @@
+# Ignore jar files
+*.jar
+
+out/
+*.class
+src/config/db.properties
+.streamlit/secrets.toml
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+static/images/*
+!static/images/.gitkeep
