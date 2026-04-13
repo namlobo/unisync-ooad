@@ -37,7 +37,7 @@ Administrators can manage students (suspend/activate/delete), remove inappropria
 | Member | Modules | Classes |
 |--------|---------|---------|
 | **Meenakshi** | Review, Student, Resource | `Review`, `Student`, `User`, `Resource`, `ResourceStatus`, `ListingType`, `ReviewDAO`, `StudentDAO`, `ResourceDAO` + impls, `ReviewService`, `StudentService`, `ResourceService`, `ReviewMenu`, `StudentMenu`, `ResourceMenu` |
-| **Nam** | Category, Transaction, Reminder + UI | `Category`, `Transaction`, `TransactionStatus`, `BarterTransaction`, `Reminder`, `TransactionFactory`, `TransactionDAO` + impl, `TransactionService`, `ReminderService`, `ReminderObserver`, `ReminderSubject`, `StudentNotification`, `SessionManager`, `DBConnection`, `ApiServer`, all `api/` handlers, `app.py` |
+| **Nam** | Category, Transaction, Reminder + UI | `Category`, `Transaction`, `TransactionStatus`, `BarterTransaction`, `Reminder`, `TransactionFactory`, `TransactionDAO` + impl, `TransactionService`, `ReminderService`, `ReminderObserver`, `ReminderSubject`, `StudentNotification`, `SessionManager`|
 | **Neema** | BuySell, LendBorrow, Strategy, Admin | `BuySellTransaction`, `LendBorrowTransaction`, `PenaltyStrategy`, `StandardPenalty`, `PremiumPenalty`, `Admin`, `AdminService`, `AdminController`, `TransactionController`, `AdminMenu`, `TransactionMenu`, `MainMenu` |
 
 
