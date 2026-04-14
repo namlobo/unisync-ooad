@@ -58,3 +58,83 @@ Key tables and relationships:
 | `Review` | 1–5 star ratings on completed transactions |
 | `Reminder` | Due-date notifications linked to students + transactions |
 
+
+## Setup & Running
+
+### Prerequisites
+
+- Java 17+
+- Python 3.9+
+- MySQL 8.0+
+- `pip install streamlit mysql-connector-python pandas requests`
+
+### 1. Database Setup (everyone does this once)
+
+```bash
+mysql -u root -p
+CREATE DATABASE unisync;
+USE unisync;
+SOURCE /path/to/UNISYNC.sql;
+```
+
+### 2. Configure DB credentials
+
+Each member creates this file locally — **never commit it**:
+
+```
+# src/config/db.properties
+db.url=jdbc:mysql://localhost:3306/unisync
+db.username=root
+db.password=YOUR_PASSWORD
+db.driver=com.mysql.cj.jdbc.Driver
+```
+
+### 3. Compile the Java backend
+
+```bash
+cd ooad_proj
+
+# List all source files
+find src -name "*.java" > sources.txt
+
+# Compile
+javac -cp "mysql-connector-j-9.6.0.jar:json-20240303.jar" \
+      -d out \
+      @sources.txt
+
+# On Windows use semicolons:
+# javac -cp "mysql-connector-j-9.6.0.jar;json-20240303.jar" -d out @sources.txt
+```
+
+### 4. Start the Java API server
+
+```bash
+java -cp "out:mysql-connector-j-9.6.0.jar:json-20240303.jar" api.ApiServer
+# Windows: java -cp "out;mysql-connector-j-9.6.0.jar;json-20240303.jar" api.ApiServer
+```
+
+You should see: `UniSync API running on http://localhost:8080`
+
+### 5. Start the Streamlit UI (new terminal)
+
+```bash
+streamlit run app.py
+```
+
+Open `http://localhost:8501` in your browser.
+---
+
+## API Endpoints
+
+All endpoints served on `http://localhost:8080`.
+
+| Method | Endpoint | Handler | Description |
+|--------|----------|---------|-------------|
+| POST | `/api/login` | `LoginHandler` | Authenticate student or admin |
+| POST | `/api/signup` | `SignupHandler` | Register a new student |
+| GET | `/api/resources` | `GetResourcesHandler` | List available resources |
+| POST | `/api/resource` | `ResourceHandler` | Add a new resource listing |
+| GET | `/api/transactions` | `TransactionsHandler` | Get transactions for a student |
+| POST | `/api/borrow` | `BorrowHandler` | Initiate a lend/borrow transaction |
+| POST | `/api/return` | `ReturnHandler` | Complete a return (calculates penalty) |
+
